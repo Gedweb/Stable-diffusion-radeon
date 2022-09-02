@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+    rocm:
+        container_name: stable_diffusion
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        volumes:
+            - ./stable-diffusion/scripts:/diffusion/scripts
+            - ./model:/diffusion/models/ldm/stable-diffusion-v1
+            - ./inputs:/diffusion/inputs
+            - ./outputs:/diffusion/outputs
+            - ./cache:/root/.cache
+        devices:
+            - /dev/kfd
+            - /dev/dri
